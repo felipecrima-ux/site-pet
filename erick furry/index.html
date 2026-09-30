@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare - Cuidamos do Seu Pet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 100%);
+            color: white;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 100%);
+            color: white;
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+        }
+
+        .btn {
+            display: inline-block;
+            background: white;
+            color: #FF6B6B;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            margin: 0.5rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-outline:hover {
+            background: white;
+            color: #FF6B6B;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Missão Section */
+        .missao {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .missao-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .missao-text h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+            line-height: 1.3;
+        }
+
+        .missao-text h2 span {
+            color: #FF6B6B;
+            display: block;
+        }
+
+        .missao-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+        }
+
+        .missao-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD4D4 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+        }
+
+        /* Serviços */
+        .servicos {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #333;
+        }
+
+        .section-title span {
+            color: #FF6B6B;
+        }
+
+        .servicos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .servico-card {
+            background: white;
+            border-radius: 15px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .servico-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(255, 107, 107, 0.2);
+        }
+
+        .servico-icon {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .servico-card h3 {
+            font-size: 1.3rem;
+            color: #333;
+            margin-bottom: 1rem;
+        }
+
+        .servico-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Galeria */
+        .galeria {
+            padding: 6rem 2rem;
+            background: white;
+        }
+
+        .galeria-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .galeria-item {
+            height: 300px;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD4D4 100%);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: transform 0.3s ease;
+            cursor: pointer;
+        }
+
+        .galeria-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Sobre */
+        .sobre {
+            padding: 6rem 2rem;
+            background: #f8f9fa;
+        }
+
+        .sobre-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .sobre-image {
+            width: 100%;
+            height: 400px;
+            background: linear-gradient(135deg, #FFE5E5 0%, #FFD4D4 100%);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+        }
+
+        .sobre-text h2 {
+            font-size: 2.5rem;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .sobre-text p {
+            font-size: 1.1rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .equipe-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #FF6B6B;
+        }
+
+        .stat-text {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        /* Contato */
+        .contato {
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, #FF6B6B 0%, #FF8E72 100%);
+            color: white;
+        }
+
+        .contato-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .contato-info h2 {
+            font-size: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .contato-item {
+            margin-bottom: 2rem;
+        }
+
+        .contato-item h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.95;
+        }
+
+        .contato-item p {
+            opacity: 0.9;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        input, textarea {
+            padding: 1rem;
+            border: none;
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+
+        form button {
+            background: white;
+            color: #FF6B6B;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        form button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+        }
+
+        /* Responsivo */
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .missao-content,
+            .sobre-content,
+            .contato-content {
+                grid-template-columns: 1fr;
+            }
+
+            .equipe-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .servicos-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .missao-image,
+            .sobre-image {
+                height: 250px;
+                font-size: 4rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo">🐾 PetCare</div>
+            <ul>
+                <li><a href="#missao">Missão</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#galeria">Galeria</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">NÓS CUIDAMOS</h1>
+            <h2 class="hero-subtitle" style="font-size: 2.5rem; margin-bottom: 2rem;">Do Seu Pet</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">
+                Oferecemos todo o carinho e a dedicação que o seu melhor amigo merece
+            </p>
+            <div>
+                <button class="btn">Agendar Consulta</button>
+                <button class="btn btn-outline">Saiba Mais</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Missão Section -->
+    <section class="missao" id="missao">
+        <div class="missao-content">
+            <div class="missao-text">
+                <h2><span>Do Seu Pet</span></h2>
+                <p>
+                    Oferecemos todo o carinho e a dedicação que o seu melhor amigo merece. Cuidamos da saúde e do bem-estar do seu pet com profissionais qualificados e muito amor.
+                </p>
+                <p>
+                    Nossa missão é proporcionar o melhor atendimento e cuidados para que seu bichano possa viver uma vida feliz e saudável ao seu lado.
+                </p>
+                <button class="btn" style="background: #FF6B6B; color: white;">Sobre Nossos Serviços</button>
+            </div>
+            <div class="missao-image">🐶</div>
+        </div>
+    </section>
+
+    <!-- Serviços -->
+    <section class="servicos" id="servicos">
+        <h2 class="section-title">Nossos <span>Serviços</span></h2>
+        <div class="servicos-grid">
+            <div class="servico-card">
+                <div class="servico-icon">🏥</div>
+                <h3>Consulta Veterinária</h3>
+                <p>Atendimento completo com profissionais experientes e equipamentos modernos para garantir a saúde do seu pet.</p>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon">✂️</div>
+                <h3>Banho e Tosa</h3>
+                <p>Higiene completa do seu pet com produtosde qualidade e técnicas que respeitam o bem-estar animal.</p>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon">💉</div>
+                <h3>Vacinação</h3>
+                <p>Amplo programa de vacinação com vacinas de qualidade para proteger seu pet de doenças.</p>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon">🦷</div>
+                <h3>Limpeza Dental</h3>
+                <p>Cuidados odontológicos completos para manter a saúde bucal e o sorriso do seu bichano.</p>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon">🏥</div>
+                <h3>Cirurgia</h3>
+                <p>Procedimentos cirúrgicos realizados por cirurgiões especializados com toda a segurança necessária.</p>
+            </div>
+            <div class="servico-card">
+                <div class="servico-icon">🏨</div>
+                <h3>Hospedagem</h3>
+                <p>Ambiente seguro e confortável para seu pet quando você precisa se ausentar.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Galeria -->
+    <section class="galeria" id="galeria">
+        <h2 class="section-title">Nossa <span>Galeria</span></h2>
+        <div class="galeria-grid">
+            <div class="galeria-item">🐕</div>
+            <div class="galeria-item">🐈</div>
+            <div class="galeria-item">🐰</div>
+            <div class="galeria-item">🐦</div>
+            <div class="galeria-item">🐹</div>
+            <div class="galeria-item">🐢</div>
+        </div>
+    </section>
+
+    <!-- Sobre -->
+    <section class="sobre" id="sobre">
+        <h2 class="section-title" style="text-align: left; margin-bottom: 0;">Sobre <span>Nós</span></h2>
+        <div class="sobre-content">
+            <div class="sobre-image">💖</div>
+            <div class="sobre-text">
+                <h2>Dedicados ao Carinho do Seu Pet</h2>
+                <p>
+                    Com mais de 15 anos de experiência, a PetCare é referência no cuidado e bem-estar de animais de estimação. Nossa equipe é formada por profissionais altamente qualificados e apaixonados pelo que fazem.
+                </p>
+                <p>
+                    Acreditamos que cada pet é único e merece um atendimento personalizado. Por isso, nossos serviços são sempre adaptados às necessidades específicas do seu bichano.
+                </p>
+                <div class="equipe-stats">
+                    <div class="stat">
+                        <div class="stat-number">15+</div>
+                        <div class="stat-text">Anos de Experiência</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">5000+</div>
+                        <div class="stat-text">Pets Felizes</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-text">Profissionais</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contato -->
+    <section class="contato" id="contato">
+        <h2 class="section-title" style="color: white; text-align: center; margin-bottom: 3rem;">Entre em <span style="color: white; text-decoration: underline;">Contato</span></h2>
+        <div class="contato-content">
+            <div class="contato-info">
+                <h2>Fale Conosco</h2>
+                <div class="contato-item">
+                    <h3>📞 Telefone</h3>
+                    <p>(11) 99999-8888</p>
+                </div>
+                <div class="contato-item">
+                    <h3>📧 E-mail</h3>
+                    <p>contato@petcare.com.br</p>
+                </div>
+                <div class="contato-item">
+                    <h3>📍 Endereço</h3>
+                    <p>Av. Paulista, 1000 - São Paulo, SP</p>
+                </div>
+                <div class="contato-item">
+                    <h3>⏰ Horário</h3>
+                    <p>Seg-Sex: 8h às 19h<br>Sab: 8h às 14h<br>Dom: Fechado</p>
+                </div>
+            </div>
+            <form>
+                <input type="text" placeholder="Seu Nome" required>
+                <input type="email" placeholder="Seu E-mail" required>
+                <input type="tel" placeholder="Seu Telefone">
+                <input type="text" placeholder="Assunto">
+                <textarea placeholder="Sua Mensagem" required></textarea>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 PetCare - Cuidamos do Seu Pet. Todos os direitos reservados.</p>
+        <p>Desenvolvido com 💖 para os amigos de quatro patas</p>
+    </footer>
+</body>
+</html>
